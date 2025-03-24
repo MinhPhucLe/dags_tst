@@ -52,11 +52,11 @@ dag = DAG(
 )
 
 spark_submit_task = SparkSubmitOperator(
-    application='hdfs://hadoop-hadoop-hdfs-nn:9000/test_task/tst_dags.py',  # Path to the Java Spark application JAR
+    application='hdfs://hadoop-hadoop-hdfs-nn:9000/test_spark/spark_airflow-1.0-SNAPSHOT.jar',  # Path to the Java Spark application JAR
     task_id='spark_submit_java_task',
     conn_id='spark_default',  # Connection ID for Spark (preconfigured in Airflow)
     verbose=True,
-    name='pyspark_task',
+    name='javaspark_task',
     conf={
         'spark.submit.deployMode': 'cluster',
         'spark.hadoop.fs.defaultFS': 'hdfs://hadoop-hadoop-hdfs-nn:9000'
