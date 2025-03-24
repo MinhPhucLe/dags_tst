@@ -59,8 +59,10 @@ spark_submit_task = SparkSubmitOperator(
     name='javaspark_task',
     conf={
         'spark.submit.deployMode': 'cluster',
+        'spark.master': 'yarn',
         'spark.hadoop.fs.defaultFS': 'hdfs://hadoop-hadoop-hdfs-nn:9000'
     },
+    java_class='org.example.simpleTask'
     executor_cores=1,
     executor_memory='512m',
     driver_memory='512m',
