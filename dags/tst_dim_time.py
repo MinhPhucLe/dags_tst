@@ -38,8 +38,8 @@ spark_submit_task = SparkSubmitOperator(
         'spark.master': 'yarn',
         'spark.hadoop.fs.defaultFS': 'hdfs://hadoop-hadoop-hdfs-nn:9000'
     },
-    executor_cores=0.5,
-    total_executor_cores=1,
+    executor_cores=1,
+    total_executor_cores=2,
     executor_memory='512m',
     driver_memory='512m',
     dag=dag
