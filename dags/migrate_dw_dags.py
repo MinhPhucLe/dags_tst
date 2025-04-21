@@ -4,9 +4,9 @@ from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOpe
 from airflow.operators.python import PythonOperator
 from airflow.utils.email import send_email
 import logging
-
-start_date = datetime(2024, 12, 15)
-
+import pendulum
+local_tz = pendulum.timezone("Asia/Bangkok")
+start_date = datetime(2024, 12, 21, tzinfo=local_tz)
 
 default_args = {
     'owner': 'airflow',
@@ -28,6 +28,23 @@ dag = DAG(
     schedule=timedelta(days=1),  # Run the DAG daily
 )
 
+spark_submit_task_migrate = SparkSubmitOperator(
+    application='hdfs://hadoop-hadoop-hdfs-nn:9000/test_spark/toStaging.py',  # Path to the Java Spark application JAR
+    task_id='spark_submit_migrate_python_task_staging',
+    conn_id='spark_default',  # Connection ID for Spark (preconfigured in Airflow)
+    verbose=True,
+    name='migrate_dw_task_staging',
+    conf={
+        'spark.submit.deployMode': 'cluster',
+        'spark.master': 'yarn',
+        'spark.hadoop.fs.defaultFS': 'hdfs://hadoop-hadoop-hdfs-nn:9000'
+    },
+    executor_cores=1,
+    executor_memory='512m',
+    driver_memory='512m',
+    dag=dag
+)
+
 spark_submit_task = SparkSubmitOperator(
     application='hdfs://hadoop-hadoop-hdfs-nn:9000/test_spark/migrate.py',  # Path to the Java Spark application JAR
     task_id='spark_submit_migrate_python_task',
@@ -44,3 +61,5 @@ spark_submit_task = SparkSubmitOperator(
     driver_memory='512m',
     dag=dag
 )
+
+spark_submit_task_migrate >> spark_submit_task

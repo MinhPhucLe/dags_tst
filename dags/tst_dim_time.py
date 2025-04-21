@@ -1,11 +1,14 @@
 from datetime import timedelta, datetime
+
+import pendulum
 from airflow import DAG
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from airflow.operators.python import PythonOperator
 from airflow.utils.email import send_email
 import logging
 
-start_date = datetime(2024, 4, 21)
+local_tz = pendulum.timezone("Asia/Bangkok")
+start_date = datetime(2024, 12, 21, tzinfo=local_tz)
 
 default_args = {
     'owner': 'airflow',
