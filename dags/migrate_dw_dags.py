@@ -6,7 +6,7 @@ from airflow.utils.email import send_email
 import logging
 import pendulum
 local_tz = pendulum.timezone("Asia/Bangkok")
-start_date = datetime(2024, 12, 21, tzinfo=local_tz)
+start_date = datetime(2024, 12, 21)
 
 default_args = {
     'owner': 'airflow',
