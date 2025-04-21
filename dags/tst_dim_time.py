@@ -28,7 +28,7 @@ dag = DAG(
 )
 
 spark_submit_task = SparkSubmitOperator(
-    application='hdfs://hadoop-hadoop-hdfs-nn:9000/test_spark/tst_dim_time',  # Path to the Java Spark application JAR
+    application='hdfs://hadoop-hadoop-hdfs-nn:9000/test_spark/tst_dim_time.py',  # Path to the Java Spark application JAR
     task_id='spark_submit_add_dim_time',
     conn_id='spark_default',  # Connection ID for Spark (preconfigured in Airflow)
     verbose=True,
