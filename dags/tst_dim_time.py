@@ -20,7 +20,7 @@ default_args = {
 }
 
 dag = DAG(
-    'simple_task_for_testing',
+    'simple_task_for_testing_dim_date',
     default_args=default_args,
     description='simple_task_for_testing',
     catchup=False,
