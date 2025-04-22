@@ -5,7 +5,7 @@ from airflow.operators.python import PythonOperator
 from airflow.utils.email import send_email
 import logging
 
-start_date = datetime(2024, 12, 15)
+start_date = datetime(2025, 4, 22)
 
 
 # def on_success_callback(context):
