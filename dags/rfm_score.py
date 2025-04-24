@@ -19,7 +19,7 @@ default_args = {
 }
 
 dag = DAG(
-    'simple_task_for_testing_mart_top_views',
+    'simple_task_for_testing_mart_rfm_score',
     default_args=default_args,
     description='simple_task_for_testing',
     catchup=False,
