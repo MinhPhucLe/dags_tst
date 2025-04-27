@@ -53,8 +53,8 @@ default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
     'start_date': start_date,
-    'email_on_failure': True,
-    'email_on_retry': True,
+    'on_failure_callback': send_failure_email,  # Thêm callback cho thất bại
+    'on_success_callback': send_success_email,
     'email_on_success': True,
     'retries': 3,
     'email': ['tryrequestamin123@gmail.com'],
