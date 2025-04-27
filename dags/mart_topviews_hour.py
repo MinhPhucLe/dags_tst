@@ -52,8 +52,10 @@ default_args = {
     'start_date': start_date,
     'email_on_failure': False,
     'email_on_retry': False,
-    'email_on_success': send_success_email,
+    'on_failure_callback': send_failure_email,  # Thêm callback cho thất bại
+    'on_success_callback': send_success_email,
     'retries': 3,
+    'email_on_success': True,
     'email': ['tryrequestamin123@gmail.com'],
     'retry_delay': timedelta(seconds=5),
 }
