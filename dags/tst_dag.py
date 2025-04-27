@@ -12,7 +12,6 @@ from airflow.utils.dates import days_ago
 
 start_date = datetime(2024, 12, 15)
 
-
 def send_email_via_smtp(subject, body, to_email):
     from_email = "tryrequestamin123@gmail.com"
     smtp_server = "smtp.gmail.com"
