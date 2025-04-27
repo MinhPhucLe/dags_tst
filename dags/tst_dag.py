@@ -18,7 +18,7 @@ def send_email_via_smtp(subject, body, to_email):
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
     smtp_user = "tryrequestamin123@gmail.com"
-    smtp_password = "sncg rsxl oyuf cgzn"
+    smtp_password = "edaq udzq pqms jgyu"
 
     msg = MIMEMultipart()
     msg['From'] = from_email
