@@ -50,14 +50,14 @@ default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
     'start_date': start_date,
-    'email_on_failure': False,
+    'email_on_failure': True,
     'email_on_retry': False,
     'on_failure_callback': send_failure_email,  # Thêm callback cho thất bại
     'on_success_callback': send_success_email,
     'retries': 3,
     'email_on_success': True,
     'email': ['tryrequestamin123@gmail.com'],
-    'retry_delay': timedelta(seconds=5),
+    'retry_delay': timedelta(seconds=30),
 }
 
 dag = DAG(
@@ -77,7 +77,11 @@ spark_submit_task = SparkSubmitOperator(
     conf={
         'spark.submit.deployMode': 'cluster',
         'spark.master': 'yarn',
-        'spark.hadoop.fs.defaultFS': 'hdfs://hadoop-hadoop-hdfs-nn:9000'
+        'spark.hadoop.fs.defaultFS': 'hdfs://hadoop-hadoop-hdfs-nn:9000',
+        'spark.executor.memory': '512m',
+        'spark.executor.cores': '1',
+        'spark.driver.memory': '512m',
+        'spark.executor.instances': '1'
     },
     executor_cores=1,
     total_executor_cores=2,
