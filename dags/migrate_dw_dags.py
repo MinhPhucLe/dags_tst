@@ -17,7 +17,7 @@ default_args = {
     'email_on_success': False,
     'retries': 3,
     'email': ['tryrequestamin123@gmail.com'],
-    'retry_delay': timedelta(seconds=5),
+    'retry_delay': timedelta(minutes=2),
 }
 
 dag = DAG(
@@ -37,7 +37,11 @@ spark_submit_task_migrate = SparkSubmitOperator(
     conf={
         'spark.submit.deployMode': 'cluster',
         'spark.master': 'yarn',
-        'spark.hadoop.fs.defaultFS': 'hdfs://hadoop-hadoop-hdfs-nn:9000'
+        'spark.hadoop.fs.defaultFS': 'hdfs://hadoop-hadoop-hdfs-nn:9000',
+        'spark.executor.memory': '512m',  # Memory for executors
+        'spark.executor.cores': '1',  # Cores per executor
+        'spark.driver.memory': '512m',  # Memory for driver
+        'spark.executor.instances': '1'
     },
     executor_cores=1,
     executor_memory='512m',
