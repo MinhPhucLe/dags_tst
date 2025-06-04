@@ -70,10 +70,10 @@ dag = DAG(
 
 spark_submit_task1 = SparkSubmitOperator(
     application='hdfs://hadoop-hadoop-hdfs-nn:9000/test_spark/mart_topviews.py',  # Path to the Java Spark application JAR
-    task_id='Transform_data_to_Data_warehouse',
+    task_id='ETL_Staging_to_Data_Warehouse',
     conn_id='spark_default',  # Connection ID for Spark (preconfigured in Airflow)
     verbose=True,
-    name='spark_submit_add_mart_top_views',
+    name='ETL_Staging_to_Data_Warehouse',
     conf={
         'spark.submit.deployMode': 'cluster',
         'spark.master': 'yarn',
@@ -92,10 +92,10 @@ spark_submit_task1 = SparkSubmitOperator(
 
 spark_submit_task2 = SparkSubmitOperator(
     application='hdfs://hadoop-hadoop-hdfs-nn:9000/test_spark/mart_topviews.py',  # Path to the Java Spark application JAR
-    task_id='Transform_data_to_Data_mart',
+    task_id='ETL_Staging_to_Data_Mart',
     conn_id='spark_default',  # Connection ID for Spark (preconfigured in Airflow)
     verbose=True,
-    name='spark_submit_add_mart_top_views',
+    name='ETL_Staging_to_Data_Mart',
     conf={
         'spark.submit.deployMode': 'cluster',
         'spark.master': 'yarn',
@@ -112,5 +112,27 @@ spark_submit_task2 = SparkSubmitOperator(
     dag=dag
 )
 
-spark_submit_task1 >> spark_submit_task2
+spark_submit_task3 = SparkSubmitOperator(
+    application='hdfs://hadoop-hadoop-hdfs-nn:9000/test_spark/mart_topviews.py',  # Path to the Java Spark application JAR
+    task_id='ETL_Data_Warehouse_to_Data_Mart',
+    conn_id='spark_default',  # Connection ID for Spark (preconfigured in Airflow)
+    verbose=True,
+    name='ETL_Data_Warehouse_to_Data_Mart',
+    conf={
+        'spark.submit.deployMode': 'cluster',
+        'spark.master': 'yarn',
+        'spark.hadoop.fs.defaultFS': 'hdfs://hadoop-hadoop-hdfs-nn:9000',
+        'spark.executor.memory': '512m',
+        'spark.executor.cores': '1',
+        'spark.driver.memory': '512m',
+        'spark.executor.instances': '1'
+    },
+    executor_cores=1,
+    total_executor_cores=2,
+    executor_memory='512m',
+    driver_memory='512m',
+    dag=dag
+)
+
+spark_submit_task1 >> spark_submit_task2 >> spark_submit_task3
 
