@@ -112,3 +112,5 @@ spark_submit_task2 = SparkSubmitOperator(
     dag=dag
 )
 
+spark_submit_task1 >> spark_submit_task2
+
