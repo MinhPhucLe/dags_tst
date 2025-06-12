@@ -8,7 +8,7 @@ from airflow.utils.email import send_email
 import logging
 
 local_tz = pendulum.timezone("Asia/Bangkok")
-start_date = datetime(2025, 4, 25, tzinfo=local_tz)
+start_date = datetime(2025, 6, 13, tzinfo=local_tz)
 
 import smtplib
 from email.mime.text import MIMEText

@@ -4,7 +4,7 @@ from airflow import DAG
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 
 local_tz = pendulum.timezone("Asia/Bangkok")
-start_date = datetime(2025, 4, 24, tzinfo=local_tz)
+start_date = datetime(2025, 6, 13, tzinfo=local_tz)
 
 default_args = {
     'owner': 'airflow',
@@ -23,7 +23,7 @@ dag = DAG(
     default_args=default_args,
     description='simple_task_for_testing',
     catchup=False,
-    schedule_interval="30 0 * * *",  # Chạy DAG hàng ngày lúc 00:30
+    schedule_interval="0 1 * * *",  # Chạy DAG hàng ngày lúc 00:30
 )
 
 spark_submit_task = SparkSubmitOperator(

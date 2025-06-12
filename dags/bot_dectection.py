@@ -14,7 +14,8 @@ from airflow.operators.dummy_operator import DummyOperator
 from airflow.utils.dates import days_ago
 
 local_tz = pendulum.timezone("Asia/Bangkok")
-start_date = datetime(2025, 4, 27, tzinfo=local_tz)
+# start_date = datetime(2025, 4, 27, tzinfo=local_tz)
+start_date = datetime(2025, 6, 13, tzinfo=local_tz)
 def send_email_via_smtp(subject, body, to_email):
     from_email = "tryrequestamin123@gmail.com"
     smtp_server = "smtp.gmail.com"

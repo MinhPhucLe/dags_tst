@@ -9,10 +9,9 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 local_tz = pendulum.timezone("Asia/Bangkok")
-start_date = datetime(2025, 4, 22)
-
 local_tz = pendulum.timezone("Asia/Bangkok")
-start_date = datetime(2025, 4, 23, tzinfo=local_tz)
+# start_date = datetime(2025, 4, 23, tzinfo=local_tz)
+start_date = datetime(2025, 6, 13, tzinfo=local_tz)
 def send_email_via_smtp(subject, body, to_email):
     from_email = "tryrequestamin123@gmail.com"
     smtp_server = "smtp.gmail.com"
@@ -63,7 +62,7 @@ dag = DAG(
     default_args=default_args,
     description='simple_task_for_testing',
     catchup=False,
-    schedule=timedelta(days=1),  # Run the DAG daily
+    schedule_interval="30 0 * * *",  # Run the DAG daily
 )
 
 spark_submit_task_migrate = SparkSubmitOperator(

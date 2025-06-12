@@ -4,7 +4,7 @@ from airflow import DAG
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 
 local_tz = pendulum.timezone("Asia/Bangkok")
-start_date = datetime(2025, 4, 27, tzinfo=local_tz)
+start_date = datetime(2025, 6, 13, tzinfo=local_tz)
 
 default_args = {
     'owner': 'airflow',
