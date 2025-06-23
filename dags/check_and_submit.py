@@ -50,7 +50,7 @@ with DAG(
     default_args=default_args,
     description='Check if Spark Streaming job is running, restart if not',
     catchup=False,
-    schedule_interval='*/5 * * * *',
+    schedule_interval='*/7 * * * *',
 ) as dag:
 
     check_and_restart_job = BashOperator(
