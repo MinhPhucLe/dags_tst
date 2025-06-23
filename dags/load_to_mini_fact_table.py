@@ -66,7 +66,7 @@ dag = DAG(
     default_args=default_args,
     description='simple_task_for_loading_data_to_mini_fact_table',
     catchup=False,
-    schedule_interval="18 * * * *",  # Run the DAG daily
+    schedule_interval="3 * * * *",  # Run the DAG daily
 )
 
 spark_submit_task = SparkSubmitOperator(
