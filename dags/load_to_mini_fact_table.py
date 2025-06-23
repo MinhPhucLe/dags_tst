@@ -15,7 +15,7 @@ from airflow.utils.dates import days_ago
 
 local_tz = pendulum.timezone("Asia/Bangkok")
 # start_date = datetime(2025, 4, 23, tzinfo=local_tz)
-start_date = datetime(2025, 6, 13, tzinfo=local_tz)
+start_date = datetime(2025, 6, 24, tzinfo=local_tz)
 def send_email_via_smtp(subject, body, to_email):
     from_email = "tryrequestamin123@gmail.com"
     smtp_server = "smtp.gmail.com"
@@ -62,19 +62,19 @@ default_args = {
 }
 
 dag = DAG(
-    'simple_task_for_testing_mart_top_views',
+    'simple_task_for_loading_data_to_mini_fact_table',
     default_args=default_args,
-    description='simple_task_for_testing',
+    description='simple_task_for_loading_data_to_mini_fact_table',
     catchup=False,
-    schedule_interval="5 * * * *",  # Run the DAG daily
+    schedule_interval="18 * * * *",  # Run the DAG daily
 )
 
 spark_submit_task = SparkSubmitOperator(
-    application='hdfs://hadoop-hadoop-hdfs-nn:9000/test_spark/mart_revenue.py',  # Path to the Java Spark application JAR
-    task_id='spark_submit_add_mart_top_views',
+    application='hdfs://hadoop-hadoop-hdfs-nn:9000/test_spark/purchase_cart_fact_table.py',  # Path to the Java Spark application JAR
+    task_id='spark_submit_load_data_to_purchase_cart_fact_table',
     conn_id='spark_default',  # Connection ID for Spark (preconfigured in Airflow)
     verbose=True,
-    name='spark_submit_add_mart_top_views',
+    name='spark_submit_load_data_to_purchase_cart_fact_table',
     conf={
         'spark.submit.deployMode': 'cluster',
         'spark.master': 'yarn',

@@ -45,7 +45,6 @@ default_args = {
     'retry_delay': timedelta(minutes=2),
 }
 
-# ============ Define DAG ============
 with DAG(
     dag_id='monitor_spark_streaming_and_restart_if_crashed',
     default_args=default_args,
