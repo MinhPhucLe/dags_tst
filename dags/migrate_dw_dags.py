@@ -50,7 +50,7 @@ default_args = {
     'email_on_failure': True,
     'email_on_retry': False,
     'email_on_success': True,
-    'on_failure_callback': send_failure_email,  # Thêm callback cho thất bại
+    'on_failure_callback': send_failure_email,
     'on_success_callback': send_success_email,
     'retries': 3,
     'email': ['tryrequestamin123@gmail.com'],
